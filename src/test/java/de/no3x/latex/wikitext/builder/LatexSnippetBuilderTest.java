@@ -8,7 +8,9 @@ import org.junit.Test;
 import java.io.StringWriter;
 
 import static de.no3x.latex.wikitext.builder.hasNumberOfOccurrences.hasNumberOfOccurrences;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.text.IsEmptyString.isEmptyString;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -63,28 +65,35 @@ public class LatexSnippetBuilderTest {
     public void testStrongAndBold() {
         String markupContent = "*strong*";
         String latex = convertToLatex(markupContent);
-        assertThat(latex, is("\\textbf{strong}"));
+        assertThat(latex, is("\\textbf{strong}\n\\\\"));
     }
 
     @Test
     public void testEmphasis() {
         String markupContent = "_emphasis_";
         String latex = convertToLatex(markupContent);
-        assertThat(latex, is("\\textit{emphasis}"));
+        assertThat(latex, is("\\textit{emphasis}\n\\\\"));
     }
 
     @Test
     public void testEscaping() {
         String markupContent = "Alice & Bob";
         String latex = convertToLatex(markupContent);
-        assertThat(latex, is("Alice \\& Bob"));
+        assertThat(latex, is("Alice \\& Bob\\\\"));
     }
 
     @Test
     public void testEscapingBackslash() {
         String markupContent = "C:\\Dev Tools\\test.txt";
         String latex = convertToLatex(markupContent);
-        assertThat(latex, is("C:\\textbackslash Dev Tools\\textbackslash test.txt"));
+        assertThat(latex, is("C:\\textbackslash Dev Tools\\textbackslash test.txt\\\\"));
+    }
+
+    @Test
+    public void testRealCode() {
+        String markupContent = "*Code Review Guidelines*\n" + "\n" + "The following aspects need to be focused, when performing the code review.\n" + "\n" + "* Correct and useful comments for all files, operations, defines, types and attributes.\n" + "** For public symbols the comments are placed inside header files. \n" + "** For private/static operations, which are not declared inside the header file, comments are placed inside source files. \n" + "** Public operation descriptions need to document the arguments (except the me pointer).\n" + "** Where possible, attributes and operations must include references to the system specifications they satisfy.\n" + "** Comments must not contain C-code (which have just been commented out instead of being removed).\n" + "* Repeated-include protection\n" + "* Source code must be formatted and indented to make the code well readable.\n" + "* Implementation blocks must be comprehensible.\n" + "* Possible errors that can occur during runtime have to be handled adequately (usually by calling the error handler with an appropriate error code).";
+        String latex = convertToLatex(markupContent);
+        assertThat(latex, is(not(isEmptyString())));
     }
 
 }

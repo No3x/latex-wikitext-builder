@@ -31,18 +31,18 @@ public class LatexSnippetBuilder extends DocumentBuilder {
     public LatexSnippetBuilder(StringWriter writer) {
         this.writer = writer;
         mapping.put(BlockType.LIST_ITEM.ordinal(), "\\item ");
-        mapping.put(BlockType.LIST_ITEM.ordinal() + END_OFFSET, "");
+        mapping.put(BlockType.LIST_ITEM.ordinal() + END_OFFSET, "\n");
         mapping.put(BlockType.BULLETED_LIST.ordinal(), "\\begin{itemize} ");
-        mapping.put(BlockType.BULLETED_LIST.ordinal() + END_OFFSET, "\\end{itemize}");
+        mapping.put(BlockType.BULLETED_LIST.ordinal() + END_OFFSET, "\\end{itemize}\n");
         mapping.put(BlockType.NUMERIC_LIST.ordinal(), "\\begin{enumerate} ");
-        mapping.put(BlockType.NUMERIC_LIST.ordinal() + END_OFFSET, "\\end{enumerate}");
+        mapping.put(BlockType.NUMERIC_LIST.ordinal() + END_OFFSET, "\\end{enumerate}\n");
         mapping.put(BlockType.PARAGRAPH.ordinal(), "");
-        mapping.put(BlockType.PARAGRAPH.ordinal() + END_OFFSET, "");
+        mapping.put(BlockType.PARAGRAPH.ordinal() + END_OFFSET, "\\\\");
 
         mapping.put(SpanType.STRONG.ordinal() + SPAN_OFFSET, "\\textbf{");
-        mapping.put(SpanType.STRONG.ordinal() + SPAN_OFFSET + END_OFFSET, "}");
+        mapping.put(SpanType.STRONG.ordinal() + SPAN_OFFSET + END_OFFSET, "}\n");
         mapping.put(SpanType.EMPHASIS.ordinal() + SPAN_OFFSET, "\\textit{");
-        mapping.put(SpanType.EMPHASIS.ordinal() + SPAN_OFFSET + END_OFFSET, "}");
+        mapping.put(SpanType.EMPHASIS.ordinal() + SPAN_OFFSET + END_OFFSET, "}\n");
 
         mapping.put(HEADING, "\\section{");
         mapping.put(HEADING_END, "}\n");
