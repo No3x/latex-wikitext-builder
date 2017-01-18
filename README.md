@@ -1,4 +1,4 @@
-# latex-wikitext-builder
+# latex-wikitext-builder [![Build Status](https://travis-ci.org/No3x/latex-wikitext-builder.svg?branch=master)](https://travis-ci.org/No3x/latex-wikitext-builder)
 A Mylyn WikiText Document Builder to convert wiki to latex code.
 # Usage
 ```java
