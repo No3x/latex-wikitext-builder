@@ -140,7 +140,7 @@ public class LatexSnippetBuilder extends DocumentBuilder {
 
     @Override
     public void lineBreak() {
-        writer.write("\\");
+        writer.write("\\\\");
     }
 
     @Override
