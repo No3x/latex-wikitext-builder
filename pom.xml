@@ -6,7 +6,7 @@
 
     <groupId>de.no3x.latex</groupId>
     <artifactId>latex-wikitext-builder</artifactId>
-    <version>1.3</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <description>A Mylyn WikiText Document Builder to convert wiki to latex code.</description>
