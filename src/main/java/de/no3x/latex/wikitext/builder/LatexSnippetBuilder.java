@@ -124,7 +124,7 @@ public class LatexSnippetBuilder extends DocumentBuilder {
     }
 
     @Override
-    public void entityReference(String s) {
+    public void entityReference(String entity) {
 
     }
 
@@ -134,17 +134,17 @@ public class LatexSnippetBuilder extends DocumentBuilder {
     }
 
     @Override
-    public void link(Attributes attributes, String s, String s1) {
-        writer.write(String.format("\\href{%s}{%s}", s, s1));
+    public void link(Attributes attributes, String hrefOrHashName, String text) {
+        writer.write(String.format("\\href{%s}{%s}", hrefOrHashName, text));
     }
 
     @Override
-    public void imageLink(Attributes attributes, Attributes attributes1, String s, String s1) {
+    public void imageLink(Attributes linkAttributes, Attributes imageAttributes, String href, String imageUrl) {
 
     }
 
     @Override
-    public void acronym(String s, String s1) {
+    public void acronym(String text, String definition) {
 
     }
 
