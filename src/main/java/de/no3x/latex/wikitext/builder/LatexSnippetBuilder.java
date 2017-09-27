@@ -135,7 +135,7 @@ public class LatexSnippetBuilder extends DocumentBuilder {
 
     @Override
     public void link(Attributes attributes, String s, String s1) {
-
+        writer.write(String.format("\\href{%s}{%s}", s, s1));
     }
 
     @Override

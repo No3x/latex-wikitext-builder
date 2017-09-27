@@ -125,4 +125,11 @@ public class LatexSnippetBuilderTest {
         assertThat(latex, containsString("lstlisting"));
     }
 
+    @Test
+    public void testLink() {
+        String markupContent = "http://google.com";
+        String latex = convertToLatex(markupContent);
+        assertThat(latex, containsString("href{"));
+    }
+
 }
