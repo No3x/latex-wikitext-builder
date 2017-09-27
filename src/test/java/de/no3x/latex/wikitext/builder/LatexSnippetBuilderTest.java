@@ -113,9 +113,16 @@ public class LatexSnippetBuilderTest {
 
     @Test
     public void testHashtagReplacement() {
-        String markupContent = "\\item{ Comment with a # in the sentence. }";
+        String markupContent = "Comment with a # in the sentence.";
         String latex = convertToLatex(markupContent);
         assertThat(latex, containsString("\\#"));
+    }
+
+    @Test
+    public void testCodeBlock() {
+        String markupContent = "{code}echo \"hello world\" {code}";
+        String latex = convertToLatex(markupContent);
+        assertThat(latex, containsString("lstlisting"));
     }
 
 }

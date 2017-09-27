@@ -38,6 +38,9 @@ public class LatexSnippetBuilder extends DocumentBuilder {
         mapping.put(BlockType.NUMERIC_LIST.ordinal() + END_OFFSET, "\\end{enumerate}\n");
         mapping.put(BlockType.PARAGRAPH.ordinal(), "");
         mapping.put(BlockType.PARAGRAPH.ordinal() + END_OFFSET, "\\\\");
+        mapping.put(BlockType.CODE.ordinal(), "\\begin{lstlisting}\n");
+        mapping.put(BlockType.CODE.ordinal() + END_OFFSET, "\\end{lstlisting}\n");
+
 
         mapping.put(SpanType.STRONG.ordinal() + SPAN_OFFSET, "\\textbf{");
         mapping.put(SpanType.STRONG.ordinal() + SPAN_OFFSET + END_OFFSET, "}\n");
@@ -46,6 +49,15 @@ public class LatexSnippetBuilder extends DocumentBuilder {
 
         mapping.put(HEADING, "\\section{");
         mapping.put(HEADING_END, "}\n");
+    }
+
+    private String getMappingOrEmptyString(Object key) {
+        String s = mapping.get(key);
+        if (null == s) {
+            // No Mapping for this type
+            s = "";
+        }
+        return s;
     }
 
     @Override
@@ -61,7 +73,7 @@ public class LatexSnippetBuilder extends DocumentBuilder {
     @Override
     public void beginBlock(BlockType blockType, Attributes attributes) {
         blockTypeHistory.push(blockType);
-        writer.write(mapping.get(blockType.ordinal()));
+        writer.write(getMappingOrEmptyString(blockType.ordinal()));
     }
 
     @Override
@@ -70,15 +82,14 @@ public class LatexSnippetBuilder extends DocumentBuilder {
     }
 
     private void endBlock(BlockType blockType) {
-        final String s = mapping.get(blockType.ordinal() + END_OFFSET);
-        if (null == s) throw new IllegalStateException("No mapping for block type " + blockType.name());
+        final String s = getMappingOrEmptyString(blockType.ordinal() + END_OFFSET);
         writer.write(s);
     }
 
     @Override
     public void beginSpan(SpanType spanType, Attributes attributes) {
         spanTypeHistory.push(spanType);
-        writer.write(mapping.get(spanType.ordinal() + SPAN_OFFSET));
+        writer.write(getMappingOrEmptyString(spanType.ordinal() + SPAN_OFFSET));
     }
 
     @Override
@@ -87,8 +98,7 @@ public class LatexSnippetBuilder extends DocumentBuilder {
     }
 
     private void endSpan(SpanType spanType) {
-        final String s = mapping.get(spanType.ordinal() + SPAN_OFFSET + END_OFFSET);
-        if (null == s) throw new IllegalStateException("No mapping for span type " + spanType.name());
+        final String s = getMappingOrEmptyString(spanType.ordinal() + SPAN_OFFSET + END_OFFSET);
         writer.write(s);
     }
 
