@@ -38,7 +38,7 @@ public class LatexSnippetBuilder extends DocumentBuilder {
         mapping.put(BlockType.NUMERIC_LIST.ordinal() + END_OFFSET, "\\end{enumerate}\n");
         mapping.put(BlockType.PARAGRAPH.ordinal(), "");
         mapping.put(BlockType.PARAGRAPH.ordinal() + END_OFFSET, "\\\\");
-        mapping.put(BlockType.CODE.ordinal(), "\\begin{lstlisting}\n");
+        mapping.put(BlockType.CODE.ordinal(), "\\begin{lstlisting}[breaklines=true]\n");
         mapping.put(BlockType.CODE.ordinal() + END_OFFSET, "\\end{lstlisting}\n");
 
 
